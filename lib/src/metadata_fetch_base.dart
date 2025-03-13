@@ -21,6 +21,12 @@ class MetadataFetch {
 
     // Make our network call
     final response = await http.get(Uri.parse(url), headers: headers);
+
+    // Return null on failure
+    if (response.statusCode != 200) {
+      return null;
+    }
+    
     final headerContentType = response.headers['content-type'];
 
     if (headerContentType != null && headerContentType.startsWith(r'image/')) {
